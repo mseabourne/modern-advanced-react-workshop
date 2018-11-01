@@ -10,11 +10,10 @@ class RadioGroup extends Component {
   }
 
   render() {
-    const children = React.Children.map(this.props.children, child => {
+    const clones = React.Children.map(this.props.children, child => {
       return React.cloneElement(child, {
         isActive: this.state.activeItemValue === child.props.value,
         onSelectItem: (itemValue) => {
-          console.log('new value:', itemValue);
           this.setState({activeItemValue: itemValue});
         }
       });
@@ -22,7 +21,7 @@ class RadioGroup extends Component {
     return (
       <fieldset className="radio-group">
         <legend>{this.props.legend}</legend>
-        {children}
+        {clones}
       </fieldset>
     );
   }
