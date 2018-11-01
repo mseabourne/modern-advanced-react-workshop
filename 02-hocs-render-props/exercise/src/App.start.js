@@ -29,11 +29,10 @@ let withMedia = (queries) => (Comp) => {
     }
 
     render() {
-      return <Comp media={this.state.media} />
+      return <Comp {...this.props} media={this.state.media} />
     }
   }
 };
-
 
 class App extends React.Component {
   render() {
