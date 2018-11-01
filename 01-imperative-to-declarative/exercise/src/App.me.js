@@ -17,7 +17,7 @@ Tips:
 */
 
 import React, { Component } from "react";
-import DocumentTitle from './DocumentTitle';
+import { DocumentTitle } from './DocumentTitleAsChildren';
 
 class App extends Component {
   state = {
@@ -28,10 +28,12 @@ class App extends Component {
   render() {
     let { todos, completed } = this.state;
     let incomplete = todos.length - completed;
-
+    const docTitle = `Todos (${incomplete})`;
     return (
       <div className="app">
-        <DocumentTitle incompleteCount={incomplete}></DocumentTitle>
+        <DocumentTitle>{docTitle}</DocumentTitle>
+        {/* <DocumentTitle title={docTitle}></DocumentTitle> */}
+
         <h1>Todos ({incomplete})</h1>
 
         <form

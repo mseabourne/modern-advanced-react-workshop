@@ -1,11 +1,17 @@
-import React, { Component } from "react";
+import { Component } from "react";
 
 class DocumentTitle extends Component {
+  componentDidMount() {
+    document.title = this.props.title;
+  }
+  componentDidUpdate() {
+    document.title = this.props.title;
+  }
 
   render() {
-    document.title = `Todos (${this.props.incompleteCount})`;
     return null;
   }
 }
 
 export default DocumentTitle;
+
