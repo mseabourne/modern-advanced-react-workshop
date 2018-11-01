@@ -51,7 +51,7 @@ class App extends Component {
 
         <ul>
           {todos.map(todo => (
-            <li>
+            <li key={todo}>
               <label>
                 <input
                   type="checkbox"
