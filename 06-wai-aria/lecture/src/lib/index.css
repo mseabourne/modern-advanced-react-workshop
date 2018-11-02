@@ -79,6 +79,10 @@ h2 {
   color: white;
 }
 
+.option.highlighted {
+  background-color: lightgreen;
+}
+
 dl.faq button {
   margin: 0;
   padding: 0;
