@@ -17,6 +17,16 @@ body {
   margin: 40px 0;
 }
 
+.progress-text {
+  width: 100%;
+  display: flex;
+  justify-content: center;
+}
+
+.progress-text > span {
+  margin: 0 0.5em 0 0.5em;
+}
+
 .progress {
   width: 100%;
   border: 1px solid #ccc;

@@ -177,6 +177,30 @@ class JumpBack extends React.Component {
   }
 }
 
+class CurrentTime extends React.Component {
+  render() {
+    return (
+      <AudioContext.Consumer>
+        { context => (
+          <span>{context.currentTime.toFixed(2)}</span>
+        )}
+      </AudioContext.Consumer>
+    )
+  }
+}
+
+class TotalTime extends React.Component {
+  render() {
+    return (
+      <AudioContext.Consumer>
+        { context => (
+          <span>{context.loaded ? context.duration.toFixed(2) : "--:--"}</span>
+        )}
+      </AudioContext.Consumer>
+    )
+  }
+}
+
 class Progress extends React.Component {
   render() {
     return (
@@ -185,23 +209,28 @@ class Progress extends React.Component {
             let { loaded, duration, currentTime, setTime } = context;
 
             return (
-              <div
-                className="progress"
-                ref={n => (this.node = n)}
-                onClick={event => {
-                  let rect = this.node.getBoundingClientRect();
-                  let clientLeft = event.clientX;
-                  let relativeLeft = clientLeft - rect.left;
-                  setTime(relativeLeft / rect.width * duration);
-                }}
-              >
+              <React.Fragment>
                 <div
-                  className="progress-bar"
-                  style={{
-                    width: loaded ? `${currentTime / duration * 100}%` : "0%"
+                  className="progress"
+                  ref={n => (this.node = n)}
+                  onClick={event => {
+                    let rect = this.node.getBoundingClientRect();
+                    let clientLeft = event.clientX;
+                    let relativeLeft = clientLeft - rect.left;
+                    setTime(relativeLeft / rect.width * duration);
                   }}
-                />
-              </div>
+                >
+                  <div
+                    className="progress-bar"
+                    style={{
+                      width: loaded ? `${currentTime / duration * 100}%` : "0%"
+                    }}
+                  />
+                </div>
+                <div className="progress-text">
+                  <CurrentTime /> / <TotalTime />
+                </div>
+              </React.Fragment>
             )
         }}
       </AudioContext.Consumer>
