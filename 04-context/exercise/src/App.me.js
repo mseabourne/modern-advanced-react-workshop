@@ -86,14 +86,14 @@ class AudioPlayer extends React.Component {
           <audio
             src={this.props.source}
             onTimeUpdate={() => {
-            this.setState({currentTime: this.audio.currentTime, duration: this.audio.duration});
-          }}
+              this.setState({currentTime: this.audio.currentTime, duration: this.audio.duration});
+            }}
             onLoadedData={() => {
-            this.setState({duration: this.audio.duration, loaded: true});
-          }}
+              this.setState({duration: this.audio.duration, loaded: true});
+            }}
             onEnded={() => {
-            this.setState({isPlaying: false});
-          }}
+              this.setState({isPlaying: false});
+            }}
             ref={n => (this.audio = n)}/> {this.props.children}
         </div>
       </AudioContext.Provider>
@@ -105,12 +105,8 @@ class Play extends React.Component {
   render() {
     return (
       <AudioContext.Consumer>
-        {context => (
-          <button
-            className="icon-button"
-            onClick={context.play}
-            disabled={context.isPlaying}
-            title="play">
+        { context => (
+          <button className="icon-button" onClick={context.play} disabled={context.isPlaying} title="play">
             <FaPlay/>
           </button>
         )}
@@ -123,12 +119,8 @@ class Pause extends React.Component {
   render() {
     return (
       <AudioContext.Consumer>
-        {context => (
-          <button
-            className="icon-button"
-            onClick={context.pause}
-            disabled={!context.isPlaying}
-            title="pause">
+        { context => (
+          <button className="icon-button" onClick={context.pause} disabled={!context.isPlaying} title="pause">
             <FaPause/>
           </button>
         )}
@@ -141,11 +133,11 @@ class PlayPause extends React.Component {
   render() {
     return (
       <AudioContext.Consumer>
-        {context => (context.isPlaying
-          ? <Pause/>
-          : <Play/>)}
+        { context => (
+          context.isPlaying ? <Pause/> : <Play/>
+        )}
       </AudioContext.Consumer>
-    );
+    )
   }
 }
 
@@ -153,11 +145,11 @@ class JumpForward extends React.Component {
   render() {
     return (
       <AudioContext.Consumer>
-        {context => (
+        { context => (
           <button
             className="icon-button"
             onClick={() => context.jump(10)}
-            disabled={null}
+            disabled={!context.isPlaying}
             title="Forward 10 Seconds">
             <FaRepeat/>
           </button>
@@ -171,11 +163,11 @@ class JumpBack extends React.Component {
   render() {
     return (
       <AudioContext.Consumer>
-        {context => (
+        { context => (
           <button
             className="icon-button"
             onClick={() => context.jump(-10)}
-            disabled={null}
+            disabled={!context.isPlaying}
             title="Back 10 Seconds">
             <FaRotateLeft/>
           </button>
@@ -189,30 +181,28 @@ class Progress extends React.Component {
   render() {
     return (
       <AudioContext.Consumer>
-        {context => {
-          let {loaded, duration, currentTime, setTime} = context;
+        { context => {
+            let { loaded, duration, currentTime, setTime } = context;
 
-          return (
-            <div
-              className="progress"
-              ref={n => (this.node = n)}
-              onClick={event => {
-              let rect = this
-                .node
-                .getBoundingClientRect();
-              let clientLeft = event.clientX;
-              let relativeLeft = clientLeft - rect.left;
-              setTime(relativeLeft / rect.width * duration);
-            }}>
+            return (
               <div
-                className="progress-bar"
-                style={{
-                width: loaded
-                  ? `${currentTime / duration * 100}%`
-                  : "0%"
-              }}/>
-            </div>
-          );
+                className="progress"
+                ref={n => (this.node = n)}
+                onClick={event => {
+                  let rect = this.node.getBoundingClientRect();
+                  let clientLeft = event.clientX;
+                  let relativeLeft = clientLeft - rect.left;
+                  setTime(relativeLeft / rect.width * duration);
+                }}
+              >
+                <div
+                  className="progress-bar"
+                  style={{
+                    width: loaded ? `${currentTime / duration * 100}%` : "0%"
+                  }}
+                />
+              </div>
+            )
         }}
       </AudioContext.Consumer>
     );
@@ -222,7 +212,8 @@ class Progress extends React.Component {
 let Exercise = () => (
   <div className="exercise">
     <AudioPlayer source={mario}>
-      <PlayPause/>
+      <Play/>
+      <Pause/>
       <span className="player-text">Mario Bros. Remix</span>
       <Progress/>
     </AudioPlayer>

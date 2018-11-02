@@ -60,9 +60,7 @@ class AudioPlayer extends React.Component {
           onTimeUpdate={null}
           onLoadedData={null}
           onEnded={null}
-          ref={n => (this.audio = n)}
-        />
-        {this.props.children}
+          ref={n => (this.audio = n)}/> {this.props.children}
       </div>
     );
   }
@@ -71,13 +69,8 @@ class AudioPlayer extends React.Component {
 class Play extends React.Component {
   render() {
     return (
-      <button
-        className="icon-button"
-        onClick={null}
-        disabled={null}
-        title="play"
-      >
-        <FaPlay />
+      <button className="icon-button" onClick={null} disabled={null} title="play">
+        <FaPlay/>
       </button>
     );
   }
@@ -86,13 +79,8 @@ class Play extends React.Component {
 class Pause extends React.Component {
   render() {
     return (
-      <button
-        className="icon-button"
-        onClick={null}
-        disabled={null}
-        title="pause"
-      >
-        <FaPause />
+      <button className="icon-button" onClick={null} disabled={null} title="pause">
+        <FaPause/>
       </button>
     );
   }
@@ -111,9 +99,8 @@ class JumpForward extends React.Component {
         className="icon-button"
         onClick={null}
         disabled={null}
-        title="Forward 10 Seconds"
-      >
-        <FaRepeat />
+        title="Forward 10 Seconds">
+        <FaRepeat/>
       </button>
     );
   }
@@ -126,9 +113,8 @@ class JumpBack extends React.Component {
         className="icon-button"
         onClick={null}
         disabled={null}
-        title="Back 10 Seconds"
-      >
-        <FaRotateLeft />
+        title="Back 10 Seconds">
+        <FaRotateLeft/>
       </button>
     );
   }
@@ -138,12 +124,9 @@ class Progress extends React.Component {
   render() {
     return (
       <div className="progress" onClick={null}>
-        <div
-          className="progress-bar"
-          style={{
-            width: "23%"
-          }}
-        />
+        <div className="progress-bar" style={{
+          width: "23%"
+        }}/>
       </div>
     );
   }
@@ -152,14 +135,18 @@ class Progress extends React.Component {
 let Exercise = () => (
   <div className="exercise">
     <AudioPlayer source={mario}>
-      <Play /> <Pause /> <span className="player-text">Mario Bros. Remix</span>
-      <Progress />
+      <Play/>
+      <Pause/>
+      <span className="player-text">Mario Bros. Remix</span>
+      <Progress/>
     </AudioPlayer>
 
     <AudioPlayer source={podcast}>
-      <PlayPause /> <JumpBack /> <JumpForward />{" "}
+      <PlayPause/>
+      <JumpBack/>
+      <JumpForward/>{" "}
       <span className="player-text">Workshop.me Podcast Episode 02</span>
-      <Progress />
+      <Progress/>
     </AudioPlayer>
   </div>
 );
