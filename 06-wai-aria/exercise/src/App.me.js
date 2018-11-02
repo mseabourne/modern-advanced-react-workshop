@@ -79,19 +79,18 @@ class RadioGroup extends Component {
     });
     return (
       <fieldset
+        role="radio-group"
         className="radio-group"
         onKeyDown={event => {
           if (event.key === "ArrowLeft" || event.key === "ArrowUp") {
             event.preventDefault();
             this.setState({
               value: findPrevValue(this.props.children, this.state.value)
-              // activeIndex: findNextItemIndex(true, this.state.activeIndex, React.Children.count(this.props.children))
             });
           } else if (event.key === "ArrowRight" || event.key === "ArrowDown") {
             event.preventDefault();
             this.setState({
               value: findNextValue(this.props.children, this.state.value)
-              // activeIndex: findNextItemIndex(false, this.state.activeIndex, React.Children.count(this.props.children))
             });
           }
         }}>
@@ -103,11 +102,25 @@ class RadioGroup extends Component {
 }
 
 class RadioButton extends Component {
+  node = React.createRef();
+
+  componentDidUpdate(prevProps) {
+    if (!prevProps.isActive && this.props.isActive) {
+      this.node.current.focus();
+    }
+  }
+
   render() {
     const { isActive, onSelect } = this.props;
     const className = "radio-button " + (isActive ? "active" : "");
     return (
-      <button className={className} onClick={onSelect} tabIndex={ isActive ? 0 : -1 }>
+      <button
+        aria-checked={ isActive }
+        role="radio"
+        className={className}
+        onClick={onSelect}
+        tabIndex={ isActive ? 0 : -1 }
+        ref={this.node} >
         {this.props.children}
       </button>
     );
@@ -121,16 +134,16 @@ class App extends Component {
         <div>
           <RadioGroup defaultValue="pause" legend="Radio Group 1">
             <RadioButton value="back">
-              <FaBackward />
+              <FaBackward aria-label="Back" />
             </RadioButton>
             <RadioButton value="play">
-              <FaPlay />
+              <FaPlay aria-label="Play" />
             </RadioButton>
             <RadioButton value="pause">
-              <FaPause />
+              <FaPause aria-label="Pause" />
             </RadioButton>
             <RadioButton value="forward">
-              <FaForward />
+              <FaForward aria-label="Forward" />
             </RadioButton>
           </RadioGroup>
         </div>
