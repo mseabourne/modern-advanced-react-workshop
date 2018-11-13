@@ -12,8 +12,15 @@ _Ryan Florence. Ryan is a consultant/trainer who has been creating websites sinc
 - [React Conf 2018 Keynote](https://github.com/simonccarter/react-conf-videos#react-conf-2018) - 90% Cleaner Code
 
 ## 1. Declarative vs Imperative
-- Declarative - set the temp and the car deals with it.  What we want.
-- Imperative - Control the knobs to set the temperature. How to get to what we want.
+- Declarative
+  - _Declarative programming is a programming paradigm … that expresses the logic of a computation without describing its control flow._ [Source](https://en.wikipedia.org/wiki/Declarative_programming)
+  - Set the temp and the car deals with it.  What we want.
+- Imperative
+  - _Imperative programming is a programming paradigm that uses statements that change a program’s state._[Source](https://en.wikipedia.org/wiki/Imperative_programming)
+  - Control the knobs to set the temperature. How to get to what we want.
+
+### [Reconcilation](https://reactjs.org/docs/reconciliation.html)
+_React provides a declarative API so that you don’t have to worry about exactly what changes on every update. This makes writing applications a lot easier, but it might not be obvious how this is implemented within React. This article explains the choices we made in React’s “diffing” algorithm so that component updates are predictable while being fast enough for high-performance apps._
 
 ### [Lecture](./01-imperative-to-declarative/lecture/src/App.start.js)
 - Modify the oscillator program to be declarative.
@@ -24,13 +31,11 @@ _Ryan Florence. Ryan is a consultant/trainer who has been creating websites sinc
 
 ### 2. HOCs and Render Props
 
-#### HOC vs Render Props Analogy
-- HOC - static composition
-  - hard chocolate shell icecream
-- Render props are dynamic composition
-  - bowl of ice cream with tang sprinkles
-
 #### [Higher Order Components](https://reactjs.org/docs/higher-order-components.html)
+_A higher-order component (HOC) is an advanced technique in React for reusing component logic. HOCs are not part of the React API, per se. They are a pattern that emerges from React’s compositional nature._
+
+_Concretely, *a higher-order component is a function that takes a component and returns a new component.*_
+
 - bummers
     - can’t change inputs
     - can’t be conditional
@@ -43,12 +48,22 @@ _Ryan Florence. Ryan is a consultant/trainer who has been creating websites sinc
     - easier to test
 
 #### [RenderProps](https://reactjs.org/docs/render-props.html)
+_The term “render prop” refers to a technique for sharing code between React components using a prop whose value is a function._
+
+_A component with a render prop takes a function that returns a React element and calls it instead of implementing its own render logic._
+
 - bummers
     - ugly
     - can’t use data in lifecycles easily
 - benefits
     - you can make HOCs out of them
     - very  composable
+
+#### HOC vs Render Props Analogy
+- HOC - static composition
+  - hard chocolate shell ice cream
+- Render props - dynamic composition
+  - bowl of ice cream with tang sprinkles
 
 ### [Lecture](./03-clone-element/lecture/src/App.start.js)
 - Tab control with clone element and to support selecting active tab.
@@ -57,7 +72,11 @@ _Ryan Florence. Ryan is a consultant/trainer who has been creating websites sinc
 - Radio button group that prevents two buttons from being clicked at once.
 
 
-## 4. [Context](https://reactjs.org/docs/react-api.html#cloneelement)
+## 4. [Context](https://reactjs.org/docs/context.html)
+_Context provides a way to pass data through the component tree without having to pass props down manually at every level._
+
+_In a typical React application, data is passed top-down (parent to child) via props, but this can be cumbersome for certain types of props (e.g. locale preference, UI theme) that are required by many components within an application. Context provides a way to share values like these between components without having to explicitly pass a prop through every level of the tree._
+
 - break up larger components into smaller pieces for robustness
 - cloning using React.Children.map allows extra props to be injected
 - make the types optional
@@ -97,6 +116,10 @@ _Portals provide a first-class way to render children into a DOM node that exist
 
 
 ## 7. [getSnapshotBeforeUpdate](https://reactjs.org/docs/react-component.html#getsnapshotbeforeupdate)
+_`getSnapshotBeforeUpdate()` is invoked right before the most recently rendered output is committed to e.g. the DOM. It enables your component to capture some information from the DOM (e.g. scroll position) before it is potentially changed. Any value returned by this lifecycle will be passed as a parameter to `componentDidUpdate()`._
+
+_This use case is not common, but it may occur in UIs like a chat thread that need to handle scroll position in a special way._
+
 - Return value is used as third arguement on componentDidUpdate
 - Two use cases
   - scrolling chat
@@ -109,6 +132,10 @@ _Portals provide a first-class way to render children into a DOM node that exist
 - Scrolling window pin to the bottom if the user hasn’t scrolled
 
 ## 8. [getDerivedStateFromProps](https://reactjs.org/docs/react-component.html#static-getderivedstatefromprops)
+_getDerivedStateFromProps is invoked right before calling the render method, both on the initial mount and on subsequent updates. It should return an object to update the state, or null to update nothing._
+
+_This method exists for rare use cases where the state depends on changes in props over time. For example, it might be handy for implementing a `<Transition>` component that compares its previous and next children to decide which of them to animate in and out._
+
 - no longer use componentWillReceiveProps since it causes problems with suspense
 - componentDidMount can be used, although may  cause an extra render when state is being updated
 - can pass in “key” to component to reset the state of a component
@@ -123,8 +150,17 @@ _Portals provide a first-class way to render children into a DOM node that exist
 ### [Exercise](./08-gdsfp/exercise/src/App.start.js)
 - Skipped
 
-## 9. Suspense - React 17
+## 9. [Suspense](https://reactjs.org/docs/code-splitting.html#suspense)
+_The simple definition of the suspense feature is that ReactJS can pause any state update until the data been fetched is ready to be rendered. In essence, ReactJS suspends the component tree while waiting for the data to be fetched completely. During the suspension, it goes ahead to handle other high-priority updates._
 [Time slicing and the React API](https://blog.pusher.com/time-slice-suspense-api-react-17/)
+
+- React suspense is released
+- React cache is still in alpha, hopefully more of a beta by the end of the year
+- suspense is all about managing transitions between screens
+- originally React router had to live outside of the react app to handle loading data while  the old screen was still displayed
+- React router 4 made the shift but resulted in the new screens showing loaders because react suspense wasn’t ready  yet
+- use ErrorBoundary around Suspense to catch errors from network requests
+
 ### [Lecture](./09-suspense/lecture/src/App.js)
 - Demonstrate the ability to load portions of the page and show a spinner for each.  utilizes reach router.
 
@@ -132,7 +168,8 @@ _Portals provide a first-class way to render children into a DOM node that exist
 - Loading contact cards.  Loading images as resources.
 
 
-## Bonus: Hooks - RFC
+## Bonus: [Hooks](https://reactjs.org/docs/hooks-intro.html) - RFC
+_Hooks are a new feature proposal that lets you use state and other React features without writing a class. They’re currently in React v16.7.0-alpha and being discussed in an open RFC._
 - [React Hooks Docs](https://reactjs.org/docs/hooks-intro.html)
 - [React Hooks RFC](https://github.com/reactjs/rfcs/blob/hooks-rfc/text/0000-react-hooks.md)
 - [Hook a Day](https://usehooks.com/)
@@ -141,7 +178,7 @@ _Portals provide a first-class way to render children into a DOM node that exist
 
 
 ## Random Notes
-- Reading - Mixins Considered Harmful by Dan Abramov
+- Reading - [Mixins Considered Harmful](https://reactjs.org/blog/2016/07/13/mixins-considered-harmful.html) by Dan Abramov
 - Server Rendering  - Facebook is making server rendering a priority. Currently rendered by PHP.
   - next.js recommended
 - Getting the latest version of React
