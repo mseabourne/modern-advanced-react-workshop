@@ -8,6 +8,8 @@ import FaPlane from "react-icons/lib/fa/plane";
 import FaSpaceShuttle from "react-icons/lib/fa/space-shuttle";
 import * as text from "./lib/text";
 
+/* Example sharing state from parent to child using context */
+
 let TabsContext = createContext();
 
 class Tabs extends Component {

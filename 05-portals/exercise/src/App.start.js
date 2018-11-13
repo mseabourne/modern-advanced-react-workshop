@@ -1,4 +1,5 @@
 /*
+Drop down menu portal
 
 Have `Portal` create a new DOM element, append it to document.body and then
 render its children into a portal. We want to have portal create the new dom

@@ -5,6 +5,9 @@ import FaPlane from "react-icons/lib/fa/plane";
 import FaSpaceShuttle from "react-icons/lib/fa/space-shuttle";
 import * as text from "./lib/text";
 
+/* Example showing children.map with cloneElement to share parent state with children.
+*/
+
 class Tabs extends Component {
   state = {
     activeIndex: 0

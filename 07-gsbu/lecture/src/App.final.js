@@ -16,11 +16,14 @@ class App extends Component {
     state: "idle" // "subscribing", "subscribed"
   };
 
+  // subscribe  input field
   inputRef = React.createRef();
 
+  // content after the subscribe form
   contentRef = React.createRef();
 
   getSnapshotBeforeUpdate() {
+    /* Determine if the user has moved focus */
     return document.activeElement !== this.contentRef.current;
   }
 

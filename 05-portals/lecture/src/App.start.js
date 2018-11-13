@@ -1,5 +1,7 @@
 import React from "react";
 
+/* Create a portal with a form  */
+
 class Dialog extends React.Component {
   render() {
     return (

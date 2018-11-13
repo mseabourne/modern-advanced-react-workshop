@@ -8,6 +8,8 @@ import FaPlane from "react-icons/lib/fa/plane";
 import FaSpaceShuttle from "react-icons/lib/fa/space-shuttle";
 import * as text from "./lib/text";
 
+/* Add support for setting the tabindex from parent to children using context. */
+
 let TabsContext = createContext();
 
 class Tabs extends Component {

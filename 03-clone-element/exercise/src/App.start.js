@@ -4,6 +4,10 @@ import FaPause from "react-icons/lib/fa/pause";
 import FaForward from "react-icons/lib/fa/forward";
 import FaBackward from "react-icons/lib/fa/backward";
 
+/*
+Add the ability to toggle the radiobuttons.
+Use cloneElement
+*/
 class RadioGroup extends Component {
   render() {
     return (

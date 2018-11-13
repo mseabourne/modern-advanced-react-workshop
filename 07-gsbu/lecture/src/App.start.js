@@ -1,6 +1,14 @@
 import React, { Component } from "react";
 import Alert from "@reach/alert";
 
+/* GetSnapshotBeforeUpdate - remember the field that has focus
+   Use the 3rd param on componentDidUpdate(prevProps, prevState, snapshot)
+   to know if the user moved focus.
+   Provides the return value from getSnapshotBeforeUpdate(
+   When user presses the enter key move the focus to the  submit.
+
+*/
+
 let sleep = ms => new Promise(res => setTimeout(res, ms));
 
 let subscribeEmail = email =>
