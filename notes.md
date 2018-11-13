@@ -1,4 +1,4 @@
-Brown Bag Notes
+# Training Notes
 
 ## Introduction
 [Github: Reach Modern Advanced React Workshop](https://github.com/reach/modern-advanced-react-workshop)
@@ -190,3 +190,4 @@ _Hooks are a new feature proposal that lets you use state and other React featur
 - [React 16.6.0](https://reactjs.org/blog/2018/10/23/react-v-16-6.html) memo, lazy, contextType
 - [React Context and Re-Renders: React Take the Wheel](https://medium.com/@ryanflorence/react-context-and-re-renders-react-take-the-wheel-cd1d20663647) - Article about putting handlers into the state
 - Ryan does not like redux
+- [react.i18n.next with hooks](https://react.i18next.com/experimental/using-with-hooks)
